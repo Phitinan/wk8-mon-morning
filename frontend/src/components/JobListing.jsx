@@ -1,7 +1,7 @@
-const JobListing = () => {
+const PropertyListing = () => {
   return (
-    <div className="job-preview">
-      <h2>Job Title</h2>
+    <div className="property-preview">
+      <h2>Property Title</h2>
       <p>Type: some title</p>
       <p>Description: some description</p>
       <p>Company: company xyz</p>
@@ -9,4 +9,4 @@ const JobListing = () => {
   );
 };
 
-export default JobListing;
+export default PropertyListing;

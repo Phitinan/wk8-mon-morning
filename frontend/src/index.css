@@ -34,9 +34,9 @@
   padding: 20px;
 }
 
-/* job previews / list */
+/* property previews / list */
 
-.job-list {
+.property-list {
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -44,7 +44,7 @@
   background-color: #f9f9f9;
 }
 
-.job-preview {
+.property-preview {
   padding: 15px;
   border: 1px solid #ddd;
   border-radius: 5px;
@@ -53,39 +53,39 @@
   transition: box-shadow 0.3s ease;
 }
 
-.job-preview:hover {
+.property-preview:hover {
   box-shadow: 1px 3px 5px rgba(41, 20, 156, 0.1);
 }
 
-.job-preview h2 {
+.property-preview h2 {
   margin: 0 0 10px;
   font-size: 1.5em;
   color: #f1356d;
 }
 
-.job-preview p {
+.property-preview p {
   margin: 5px 0;
   color: #666;
 }
 
-.job-preview p span {
+.property-preview p span {
   font-weight: bold;
 }
 
-.job-preview a{
+.property-preview a{
   text-decoration: none;
 }
 
-/* job details page */
-.job-details h2 {
+/* property details page */
+.property-details h2 {
   font-size: 20px;
   color: #f1356d;
   margin-bottom: 10px;
 }
-.job-details div {
+.property-details div {
   margin: 20px 0;
 }
-.job-details button {
+.property-details button {
   background: #f1356d;
   color: #fff;
   border: 0;
@@ -94,7 +94,7 @@
   cursor: pointer;
 }
 
-/* create new job form */
+/* create new property form */
 .create {
   max-width: 400px;
   margin: 0 auto;

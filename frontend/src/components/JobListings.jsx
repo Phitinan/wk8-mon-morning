@@ -1,13 +1,13 @@
-import JobListing from "./JobListing";
+import PropertyListing from "./PropertyListing";
 
-const JobListings = () => {
+const PropertyListings = () => {
   return (
-    <div className="job-list">
-      <JobListing />
-      <JobListing />
-      <JobListing />
+    <div className="property-list">
+      <PropertyListing />
+      <PropertyListing />
+      <PropertyListing />
     </div>
   );
 };
 
-export default JobListings;
+export default PropertyListings;
