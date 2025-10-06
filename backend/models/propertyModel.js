@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const jobSchema = new mongoose.Schema({
+const propertySchema = new mongoose.Schema({
   title: { type: String, required: true },
   type: { type: String, required: true },
   description: { type: String, required: true },
@@ -13,7 +13,7 @@ const jobSchema = new mongoose.Schema({
 
 
 //add  virtual field id
-jobSchema.set('toJSON', {
+propertySchema.set('toJSON', {
   virtuals: true,
   transform: (doc, ret) => {
     ret.id = ret._id;
@@ -21,7 +21,7 @@ jobSchema.set('toJSON', {
   }
 });
 
-const Job = mongoose.model('Job', jobSchema);
+const Property = mongoose.model('Property', propertySchema);
 
-module.exports = Job;
+module.exports = Property;
 
