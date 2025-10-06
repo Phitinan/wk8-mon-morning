@@ -1,10 +1,10 @@
 const Navbar = () => {
   return (
     <nav className="navbar">
-      <h1>Job Search</h1>
+      <h1>Property Search</h1>
       <div className="links">
         <a href="/">Home</a>
-        <a href="/add-job">Add Job</a>
+        <a href="/add-property">Add Property</a>
       </div>
     </nav>
   );
