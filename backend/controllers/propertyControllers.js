@@ -3,13 +3,13 @@ const mongoose = require("mongoose");
 
 //GET / property;
 const getAllProperties = async (req, res) => {
-try{
-  const properties = await Property.find({}).sort({ createdAt: -1 })
+  try {
+    const properties = await Property.find({}).sort({ createdAt: -1 });
 
-  res.status(200).json(properties)
-}catch{
-  res.status(500).json({message:"failed to get properties"})
-}
+    res.status(200).json(properties);
+  } catch {
+    res.status(500).json({ message: "failed to get properties" });
+  }
 };
 
 // // POST /property
@@ -66,37 +66,39 @@ const createProperty = async (req, res) => {
     await newProperty.save();
     res.status(201).json(newProperty);
   } catch (error) {
-    console.error("Error creating job:", error);
+    console.error("Error creating property:", error);
     res.status(500).json({ error: "Server Error" });
   }
 };
 
 // GET /property/:propertyId
 const getPropertyById = async (req, res) => {
-  const { id } = req.params
+  const { propertyId } = req.params
 
-  if (!mongoose.Types.ObjectId.isValid(id)) {
+  if (!mongoose.Types.ObjectId.isValid(propertyId)) {
     return res.status(404).json({ error: 'No such property' })
   }
-
-  const property = await Property.findById(id)
-
-  if (!property) {
-    return res.status(404).json({ error: 'No such property' })
+  try {
+    const property = await Property.findById(propertyId)
+    if (!property) {
+      return res.status(404).json({ error: 'No such property' })
+    }
+    res.status(200).json(property)
+  } catch (error) {
+    res.status(500).json({ error: "can't get property" });
   }
 
-  res.status(200).json(property)
 };
 
 // PUT /property/:propertyId
 const updateProperty = async (req, res) => {
-  const { id } = req.params
+  const { propertyId } = req.params
 
-  if (!mongoose.Types.ObjectId.isValid(id)) {
+  if (!mongoose.Types.ObjectId.isValid(propertyId)) {
     return res.status(404).json({ error: 'No such property' })
   }
 
-  const property = await Property.findOneAndUpdate({ _id: id }, {
+  const property = await Property.findOneAndUpdate({ _id: propertyId }, {
     ...req.body
   }, { new: true, runValidators: true })
 
@@ -109,19 +111,23 @@ const updateProperty = async (req, res) => {
 
 // DELETE /property/:propertyId
 const deleteProperty = async (req, res) => {
-  const { id } = req.params
+  const { propertyId } = req.params
 
-  if (!mongoose.Types.ObjectId.isValid(id)) {
+  if (!mongoose.Types.ObjectId.isValid(propertyId)) {
     return res.status(404).json({ error: 'No such property' })
   }
+  try {
+    const property = await Property.findOneAndDelete({ _id: propertyId })
 
-  const property = await Property.findOneAndDelete({ _id: id })
+    if (!property) {
+      return res.status(400).json({ error: 'No such property' })
+    }
 
-  if (!property) {
-    return res.status(400).json({ error: 'No such property' })
+    res.status(204).send();
+  } catch (error) {
+    console.error("Error deleting property:", error);
+    res.status(500).json({ error: "Server Error" });
   }
-
-  res.status(200).json(property)
 };
 
 module.exports = {

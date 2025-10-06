@@ -1,4 +1,5 @@
 import PropertyListing from "./PropertyListing";
+import {Link} from "react-router-dom";
 
 const PropertyListings = ({properties}) => {
   console.log(properties);
@@ -6,7 +7,9 @@ const PropertyListings = ({properties}) => {
   return (
     <div className="property-list">
       {properties.map((property) => (
-        <PropertyListing key={property._id} property={property} />
+        <Link to={`properties/${property._id}`}>
+          <PropertyListing key={property._id} property={property} />
+        </Link>
       ))}
     </div>
   );

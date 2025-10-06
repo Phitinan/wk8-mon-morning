@@ -4,7 +4,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/HomePage";
 import AddPropertyPage from "./pages/AddPropertyPage";
 import Navbar from "./components/Navbar";
-import NotFoundPage from "./pages/NotFoundPage"
+import NotFoundPage from "./pages/NotFoundPage";
+import PropertyPage from "./pages/PropertyPage";
+import EditPage from "./pages/EditPage";
 
 const App = () => {
 
@@ -16,6 +18,8 @@ const App = () => {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/add-property" element={<AddPropertyPage />} />
+              <Route path="/properties/:id" element={<PropertyPage />} />
+              <Route path="/edit/:id" element={<EditPage />} />
               <Route path='*' element={<NotFoundPage />} />
             </Routes>
           </div>

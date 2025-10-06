@@ -13,8 +13,7 @@ const PropertyListing = ({property})=> {
       <p> ZipCode: {property.location.zipCode}</p>
       <p>Sq feet{property.squareFeet}</p>
       <p>Year: {property.yearBuilt}</p>
-      <button>edit</button>
-      <button>delete</button>
+      
     </div>
   );
 };
