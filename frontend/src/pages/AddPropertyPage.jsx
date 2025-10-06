@@ -1,10 +1,10 @@
 import { useState } from "react";
 import {useNavigate} from "react-router-dom";
-
+import useField from "../hooks/useField";
 
 const AddPropertyPage = () => {
   const [title, setTitle]= useState("")
-  const [type, setType]= useState("")
+  const [type, setType]= useState("Apartment")
   const [description, setDescription]= useState("")
   const [price, setPrice]= useState("")
   const [address, setAddress]= useState("")
@@ -15,6 +15,9 @@ const AddPropertyPage = () => {
   const [yearBuilt, setYearBuilt]= useState("")
 
   const navigate = useNavigate();
+
+  const user = JSON.parse(localStorage.getItem("user"));
+  const token = user ? user.token : null;
   
   const addProperty = async (newProperty) => {
     try {
@@ -23,6 +26,7 @@ const AddPropertyPage = () => {
         method: "POST",
         headers: {
           "Content-Type" : "application/JSON",
+          Authorization: `Bearer ${token}`,
         },
         body : JSON.stringify(newProperty),
       });
@@ -72,7 +76,7 @@ const AddPropertyPage = () => {
           type="text"
           required
           value={title}
-          onChange={(e) => {setTitle(e.target.value)}}
+          onChange={(e)=>{setTitle(e.target.value)}}
         />
         <label>Property type:</label>
         <select value={type}

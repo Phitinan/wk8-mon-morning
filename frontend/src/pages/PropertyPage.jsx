@@ -7,11 +7,14 @@ const PropertyPage = () => {
   const [property, setProperty] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const user = JSON.parse(localStorage.getItem("user"))
+  const token = user ? user.token : null;
 
   const deleteProperty = async (id) => {
     try {
       const res = await fetch(`/api/properties/${id}`, {
         method: "DELETE",
+        headers: { "Content-Type": "application/json", "authorization": `Bearer ${token}` },
       });
       if (!res.ok) {
         throw new Error("Failed to delete property");
@@ -21,18 +24,7 @@ const PropertyPage = () => {
     }
   };
 
-  const editProperty = async (id) => {
-    try {
-      const res = await fetch(`/api/properties/${id}`, {
-        method: "PATCH",
-      });
-      if (!res.ok) {
-        throw new Error("Failed to edit property");
-      }
-    } catch (error) {
-      console.error("Error editing property:", error);
-    }
-  };
+
 
   useEffect(() => {
     const fetchProperty = async () => {

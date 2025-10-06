@@ -2,7 +2,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 
-const AddPropertyPage = () => {
+const EditPropertyPage = () => {
     const [title, setTitle] = useState("")
     const [type, setType] = useState("")
     const [description, setDescription] = useState("")
@@ -15,20 +15,23 @@ const AddPropertyPage = () => {
     const [yearBuilt, setYearBuilt] = useState("")
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const {id} = useParams();
 
+    const user = JSON.parse(localStorage.getItem("user"))
+    const token = user ? user.token : null;
+    console.log(token)
 
     const navigate = useNavigate();
-    const { id } = useParams();
-
-
+    
     const editProperty = async (newProperty) => {
-
+        
         try {
             console.log(newProperty)
             const res = await fetch(`/api/properties/${id}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/JSON",
+                    Authorization: `Bearer ${token}`,
                 },
                 body: JSON.stringify(newProperty),
             });
@@ -155,21 +158,21 @@ const AddPropertyPage = () => {
                     type="text"
                     required
                     value={zipCode}
-                    onChange={(e) => setZipCode(e.target.value)}
+                    onChange={(e) => {setZipCode(e.target.value)}}
                 />
                 <label>Square Feet:</label>
                 <input
                     type="number"
                     required
                     value={squareFeet}
-                    onChange={(e) => setSquareFeet(e.target.value)}
+                    onChange={(e) => {setSquareFeet(e.target.value)}}
                 />
                 <label>Year Built</label>
                 <input
                     type="number"
                     required
                     value={yearBuilt}
-                    onChange={(e) => setYearBuilt(e.target.value)}
+                    onChange={(e) => {setYearBuilt(e.target.value)}}
                 />
                 <button type="submit">Submit</button>
             </form>
@@ -177,4 +180,4 @@ const AddPropertyPage = () => {
     );
 };
 
-export default AddPropertyPage;
+export default EditPropertyPage;

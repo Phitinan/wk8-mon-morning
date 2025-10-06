@@ -22,7 +22,7 @@ const Home = () => {
         setProperties(data)
         setError(null)
       } catch (error) {
-        setIsPending(false);
+        setIsLoading(false);
         setError(error.message);
       }
     }

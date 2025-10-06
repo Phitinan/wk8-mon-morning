@@ -58,10 +58,10 @@ const getAllProperties = async (req, res) => {
 const createProperty = async (req, res) => {
 
   try {
-    const user_id = req.user._id;
+    // const user_id = req.user._id;
     const newProperty = new Property({
       ...req.body,
-      user_id,
+      // user_id,
     });
     await newProperty.save();
     res.status(201).json(newProperty);
@@ -92,16 +92,15 @@ const getPropertyById = async (req, res) => {
 
 // PUT /property/:propertyId
 const updateProperty = async (req, res) => {
-  const { propertyId } = req.params;
+  const { propertyId } = req.params
 
   if (!mongoose.Types.ObjectId.isValid(propertyId)) {
     return res.status(404).json({ error: 'No such property' })
   }
 
-  const property = await Property.findOneAndUpdate(
-    { _id: propertyId }, 
-    {...req.body},
-    { new: true, runValidators: true })
+  const property = await Property.findOneAndUpdate({ _id: propertyId }, {
+    ...req.body
+  }, { new: true, runValidators: true })
 
   if (!property) {
     return res.status(400).json({ error: 'No such property' })
